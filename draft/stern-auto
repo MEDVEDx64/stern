@@ -1,0 +1,9 @@
+# Stern quick-make frontend
+#!/bin/bash
+
+if [ ! "$1" ]; then
+	echo "usage: $0 file"
+	exit 1
+fi
+
+simport < $1 | smacro | sloop | stern
