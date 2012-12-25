@@ -4,17 +4,23 @@
 
 void PrintString(const char *string)
 {
-    if (!string) return;
-
+    if (!string) {
+        fprintf(stderr, "string is null");
+        return;
+    }
+    
     while (string[0] == ' ' || string[0] == '\t') string++;
-
+    
     fprintf(stdout, "%s", string);
 }
 
 void LoopString(const char *s, int i)
 {
-    if (!s) return;
-
+    if (!s) {
+        fprintf(stderr, "string is null");     
+        return;
+    }
+    
     int j = 0;
     for (j = 0; j<strlen(s); j++) {
         if (s[j] == '#') {
@@ -28,8 +34,11 @@ void LoopString(const char *s, int i)
 
 void LoopStrings(char **strs, int num, int i, int limit, int step)
 {
-    if (!strs) return;
-
+    if (!strs) {
+        fprintf(stderr, "strings is null");
+        return;
+    }
+    
     int j;
     
     for (; i<limit; i += step) {
@@ -50,7 +59,10 @@ char *GetString()
 
 int TestWhile(const char *s)
 {
-    if (!s) return 0;
+    if (!s) {
+        fprintf(stderr, "string is null");
+        return 0;
+    }
     
     if ((s++)[0] != '!') return 0;
 
@@ -66,7 +78,10 @@ int TestWhile(const char *s)
 
 char **GetStrings(int *num)
 {
-    if (!num) return 0;
+    if (!num) {
+        fprintf(stderr, "unknown error");
+        return 0;
+    }
     
     char **res = malloc(sizeof(char*)*1024);
     
@@ -85,10 +100,16 @@ char **GetStrings(int *num)
 
 int GetStart(const char *s)
 {
-    if (!s) return 0;
+    if (!s) {
+        fprintf(stderr, "string is null");
+        return 0;
+    }
     
-    if ((s++)[0] != '!') return 0;
-
+    if ((s++)[0] != '!') {
+        fprintf(stderr, "unknown start num");
+        return 0;
+    }
+    
     char s1[3][1024];
     int _;
     int result;
@@ -102,9 +123,15 @@ int GetStart(const char *s)
 
 int GetLimit(const char *s)
 {
-    if (!s) return 0;
+    if (!s) {
+        fprintf(stderr, "string is null");
+        return 0;
+    }
     
-    if ((s++)[0] != '!') return 0;
+    if ((s++)[0] != '!') {
+        fprintf(stderr, "unknown start num");
+        return 0;
+    }
 
     char s1[3][1024];
     int _;
@@ -119,9 +146,15 @@ int GetLimit(const char *s)
 
 int GetStep(const char *s)
 {
-    if (!s) return 0;
+    if (!s) {
+        fprintf(stderr, "string is null");
+        return 0;
+    }
     
-    if ((s++)[0] != '!') return 0;
+    if ((s++)[0] != '!') {
+        fprintf(stderr, "unknown start num");
+        return 0;
+    }
 
     char s1[3][1024];
     int _;

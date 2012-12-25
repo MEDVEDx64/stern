@@ -5,12 +5,12 @@
 void PrintString(const char *string)
 {
     if (!string) {
-        fprintf(stderr, "%s: NULL string recieved\n", __FUNCTION__);
+        fprintf(stderr, "string is null");
         return;
     }
-
+    
     while (string[0] == ' ' || string[0] == '\t') string++;
-
+    
     fprintf(stdout, "%s", string);
 }
 
@@ -20,7 +20,7 @@ char *GetString(FILE *f)
 
     char *buf = malloc(1024);
     if (fgets(buf, 1024, f)) return buf;
-
+    
     free(buf);
     return 0;
 }
@@ -28,14 +28,14 @@ char *GetString(FILE *f)
 int TestInclude(const char *s)
 {
     if (!s) {
-        fprintf(stderr, "%s: NULL string recieved\n", __FUNCTION__);
+        fprintf(stderr, "string is null");
         return 0;
     }
-
+    
     if ((s++)[0] != '<') return 0;
     char buf[1024];
     int i;
-    for (i = 0; i < 1024; i++)
+    for (i = 0; i < 1024; i++) 
         if (s[i] != '>') {
             if (s[i] == '\0' || s[i] == '\n') return 0;
             else buf[i] = s[i];
@@ -51,10 +51,10 @@ int TestInclude(const char *s)
 char *GetFileFromString(const char *s) 
 {
     if (!s) {
-        fprintf(stderr, "%s: NULL string recieved\n", __FUNCTION__);
+        fprintf(stderr, "string is null");
         return 0;
     }
-
+    
     if ((s++)[0] != '<') return 0;
     char *buf = malloc(1024);
     int i;
@@ -70,7 +70,7 @@ char *GetFileFromString(const char *s)
             buf[i]= 0;
             return buf;
         }
-
+    
     free(buf);
     return 0;
 }
@@ -78,14 +78,14 @@ char *GetFileFromString(const char *s)
 void Proc(FILE *f)
 {
     if (!f) {
-        fprintf(stderr, "Can`t reach file.\n");
+        fprintf(stderr, "file no found!\n");
         return;
     }
-
+        
     while (!feof(f)) { //пока файл не закончится
         char *s = GetString(f); //находим строку
         if (!s) continue;
-
+        
         if (TestInclude(s)) { //проверяем, на то, что это инклюд
             char *tmp = GetFileFromString(s);
             if (tmp) {
@@ -94,13 +94,13 @@ void Proc(FILE *f)
                 free(tmp);
             }
             else {
-                fprintf(stderr, "Hey, that file`s a spy!\n");
+                fprintf(stderr, "that file`s a spy!\n");
             }
         }
         else {
             PrintString(s);
         }
-
+               
         free(s);
     }
 }
@@ -109,6 +109,6 @@ main()
 {
     FILE *f = stdin;
     Proc(f);
-
+    
     return 0;
 }
